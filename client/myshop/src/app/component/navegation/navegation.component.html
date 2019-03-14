@@ -1,0 +1,29 @@
+<div class="m-2">
+	<ul class="list-group">
+	  <li class="list-group-item"> <a href="">Celulares</a> </li>
+	  <li class="list-group-item"><a href="">Computadoras</a> </li>
+	  <li class="list-group-item"><a href="">Tv </a></li>
+	</ul>
+
+	<div class="m-3"></div>
+
+	<ul class="list-group">
+	  <li class="list-group-item">
+	  	<i class="fas fa-shopping-cart"></i>
+	  </li>
+	  
+	  <div *ngFor="let product of data">
+	  	<li class="list-group-item">
+			<div class="row">
+				<div class="col-m-9">
+					<img src="{{product.img}}" height="45" width="45">
+				</div>
+				<div class="col-m-3 p-2">
+					<a href="" class="btn btn-sm btn-danger">X</a>
+				</div>
+			</div>
+	  	</li>
+	  </div>
+	  <a href="buy/validate" class="btn btn-sm btn-primary">Buy</a>
+	</ul>
+</div>

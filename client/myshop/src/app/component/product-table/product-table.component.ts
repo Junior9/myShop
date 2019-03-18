@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {ProductService} from '../../service/product-service.service';
+import {Product} from '../../model/product'
 
 @Component({
   selector: 'app-product-table',
@@ -21,5 +22,9 @@ constructor(private productService:ProductService) { }
   	}else{
   		this.data = this.productService.refreshList();
   	}
+  }
+
+  removeProductShoppingCar(product:Product){
+    this.data = this.productService.shoppingCarRemove(product);
   }
 }

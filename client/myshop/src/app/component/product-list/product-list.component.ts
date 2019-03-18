@@ -17,7 +17,6 @@ export class ProductListComponent implements OnInit {
 
 
     this.data = this.productService.refreshList();
-
     /*
   	this.productService.refreshList().subscribe(
          res=> this.data = res,
@@ -26,9 +25,8 @@ export class ProductListComponent implements OnInit {
     */
   }
 
-  addShoppingCar(){
-    console.log("To aqui ");
-    //this.productService.shoppingCarAdd(product);
+  addShoppingCar(product:Product){
+    this.productService.shoppingCarAdd(product);
   }
 
   delete(id:string){

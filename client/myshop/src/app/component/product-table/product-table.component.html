@@ -21,7 +21,7 @@
 
           <th *ngIf="isBuy" scope="col">
 
-            <a href="" class="btn btn-danger">X</a>
+            <a (click)="removeProductShoppingCar(product)" class="btn btn-danger">X</a>
           </th>
 
         </tr>

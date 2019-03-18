@@ -16,4 +16,8 @@ export class NavegationComponent implements OnInit {
   	 this.data = this.productService.shoppingCarList();
   }
 
+  removeProductShoppingCar(product:Product){
+  	this.data = this.productService.shoppingCarRemove(product);
+  }
+
 }

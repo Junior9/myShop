@@ -20,25 +20,25 @@ export class ProductService {
       description:"El mejor celular del Motorola"
     },
     {
-      id:'1',
+      id:'2',
       name:"MotoG7",
       img:"https://http2.mlstatic.com/moto-g7-plus-D_NQ_NP_929867-MLM29559103847_032019-O.webp",
       description:"El mejor celular del Motorola"
     },
     {
-      id:'1',
+      id:'3',
       name:"MotoG7",
       img:"https://http2.mlstatic.com/moto-g7-plus-D_NQ_NP_929867-MLM29559103847_032019-O.webp",
       description:"El mejor celular del Motorola"
     },
     {
-      id:'1',
+      id:'4',
       name:"MotoG7",
       img:"https://http2.mlstatic.com/moto-g7-plus-D_NQ_NP_929867-MLM29559103847_032019-O.webp",
       description:"El mejor celular del Motorola"
     },
     {
-      id:'1',
+      id:'5',
       name:"MotoG7",
       img:"https://http2.mlstatic.com/moto-g7-plus-D_NQ_NP_929867-MLM29559103847_032019-O.webp",
       description:"El mejor celular del Motorola"
@@ -63,32 +63,37 @@ export class ProductService {
     };
   }
 
+
   shoppingCarAdd(product:Product){
-    this.productsShoppingCar.push(product);
+    var addProduct = true;
+    this.productsShoppingCar.forEach(p => {
+      if(p.id == product.id){
+        addProduct = false;
+      }
+    })
+
+    if(addProduct){
+      this.productsShoppingCar.push(product);
+    } 
+    localStorage.setItem("shoppingList",JSON.stringify( this.productsShoppingCar));
   }
 
   shoppingCarRemove(product:Product){
-    
+    var index = -1;
+    var newList: any =[];
+    this.productsShoppingCar.forEach((p,index) => {
+      if(p.id != product.id){
+        newList.push(product);
+      }
+    })
+    this.productsShoppingCar = newList;
+    localStorage.setItem("shoppingList",JSON.stringify( this.productsShoppingCar));
+    return this.productsShoppingCar;
   }
 
   shoppingCarList(){
+    this.productsShoppingCar = JSON.parse(localStorage.getItem("shoppingList"));
     return this.productsShoppingCar;
-
-    /*
-    return [{
-      id:'1',
-      name:"MotoG7",
-      img:"https://http2.mlstatic.com/moto-g7-plus-D_NQ_NP_929867-MLM29559103847_032019-O.webp",
-      description:"El mejor celular del Motorola"
-    },
-    {
-      id:'1',
-      name:"MotoG7",
-      img:"https://http2.mlstatic.com/moto-g7-plus-D_NQ_NP_929867-MLM29559103847_032019-O.webp",
-      description:"El mejor celular del Motorola"
-    }
-    ];
-    */
   }
 
   refreshList(){

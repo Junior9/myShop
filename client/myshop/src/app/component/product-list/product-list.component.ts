@@ -26,6 +26,11 @@ export class ProductListComponent implements OnInit {
     */
   }
 
+  addShoppingCar(){
+    console.log("To aqui ");
+    //this.productService.shoppingCarAdd(product);
+  }
+
   delete(id:string){
     this.productService.delete(id);
   }

@@ -10,6 +10,7 @@ export class ProductService {
   constructor(private http:HttpClient) { }
 
   URL = "http://";
+  productsShoppingCar : any =[]; 
 
   data = [
     {
@@ -62,7 +63,18 @@ export class ProductService {
     };
   }
 
+  shoppingCarAdd(product:Product){
+    this.productsShoppingCar.push(product);
+  }
+
+  shoppingCarRemove(product:Product){
+    
+  }
+
   shoppingCarList(){
+    return this.productsShoppingCar;
+
+    /*
     return [{
       id:'1',
       name:"MotoG7",
@@ -76,6 +88,7 @@ export class ProductService {
       description:"El mejor celular del Motorola"
     }
     ];
+    */
   }
 
   refreshList(){

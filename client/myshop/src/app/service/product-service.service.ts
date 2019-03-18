@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import {Product} from '../model/product';
 import {HttpClient} from '@angular/common/http';
+import {SessionService} from  '../service/session.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private session:SessionService) { }
 
   URL = "http://";
-  productsShoppingCar : any =[]; 
+  productsShoppingCar : any = []; 
 
   data = [
     {
@@ -66,16 +67,21 @@ export class ProductService {
 
   shoppingCarAdd(product:Product){
     var addProduct = true;
-    this.productsShoppingCar.forEach(p => {
-      if(p.id == product.id){
-        addProduct = false;
-      }
-    })
 
-    if(addProduct){
+    if(this.productsShoppingCar === null){
+      this.productsShoppingCar=[];
       this.productsShoppingCar.push(product);
-    } 
-    localStorage.setItem("shoppingList",JSON.stringify( this.productsShoppingCar));
+    }else{
+      this.productsShoppingCar.forEach(p => {
+        if(p.id == product.id){
+          addProduct = false;
+        }
+      })
+      if(addProduct){
+        this.productsShoppingCar.push(product);
+      } 
+    }
+    this.session.addSession("shoppingList",this.productsShoppingCar);
   }
 
   shoppingCarRemove(product:Product){
@@ -87,12 +93,12 @@ export class ProductService {
       }
     })
     this.productsShoppingCar = newList;
-    localStorage.setItem("shoppingList",JSON.stringify( this.productsShoppingCar));
+    this.session.addSession("shoppingList",this.productsShoppingCar);
     return this.productsShoppingCar;
   }
 
   shoppingCarList(){
-    this.productsShoppingCar = JSON.parse(localStorage.getItem("shoppingList"));
+    this.productsShoppingCar = this.session.getSession("shoppingList");
     return this.productsShoppingCar;
   }
 

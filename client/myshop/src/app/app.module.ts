@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +16,7 @@ import { UserComponent } from './component/user/user.component';
 import { PageNotFoundComponent } from './page/page-not-found/page-not-found.component';
 import { NavegationComponent } from './component/navegation/navegation.component';
 import { BannerComponent } from './component/banner/banner.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import { ProductTableComponent } from './component/product-table/product-table.component';
 import { BuyValidateComponent } from './page/buy-validate/buy-validate.component';
 import { BuyPayComponent } from './page/buy-pay/buy-pay.component';
@@ -43,6 +44,7 @@ import { BuyPayComponent } from './page/buy-pay/buy-pay.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule     
   ],
   providers: [],

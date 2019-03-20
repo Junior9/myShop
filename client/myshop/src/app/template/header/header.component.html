@@ -1,4 +1,22 @@
 <nav class="navbar navbar-light bg-light text-light bg-dark">
-  <span class="navbar-brand text-light"><a href="/">MyShop</a></span>
-  <span></span>
+	<div class="container-fluid">
+		<div class="navbar-header">
+	      <span class="navbar-brand text-light"><a href="/home">MyShop</a></span>
+	    </div> 	
+
+		<ul class="nav navbar-nav navbar-right">
+			<div *ngIf="isLogged">
+				<li class="nav-item dropdown ">
+			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			          User
+			        </a>
+			        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			          <a class="dropdown-item" href="#">Perfil</a>
+			          <div class="dropdown-divider"></div>
+			          <a class="dropdown-item" (click)="logoff()">Logoff</a> 
+			        </div>
+			    </li>
+			</div>
+	    </ul>
+	</div>  
 </nav>

@@ -27,13 +27,14 @@ export class UserComponent implements OnInit {
   }
 
   register(userForm:NgForm){
-  	var user = this.service.create(userForm.value);
-  	console.log(user);
+    console.log(userForm.value);
 
-  	if(user.id === ''){	
-  		this.router.navigate(['/register'])		
-  	}else{
-  		this.router.navigate(['/home'])	
-  	}
+  	this.service.create(userForm.value);
+
+  	//if(user === null){	
+  		//this.router.navigate(['/register'])		
+  	//}else{
+  		//this.router.navigate(['/home'])	
+  	//}
   }
 }

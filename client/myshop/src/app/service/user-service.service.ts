@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import {User} from '../model/user';
 import {SessionService} from '../service/session.service';
-
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
 
-  constructor(private session:SessionService) { }
+  URL = "http://localhost:3000/api/";
+
+  constructor(private session:SessionService,
+                private http:HttpClient) { }
   
   user: User = {
-  	id : '1',
+  id : '1',
 	name :"",
 	email:"",
 	password:"",
@@ -28,7 +31,7 @@ export class UserServiceService {
 
   create(user:User){
   	this.session.startSession(user);
-  	return this.user;
+    this.http.post(this.URL+'user/create',user);
   }
 
   logoff(){

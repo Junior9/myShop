@@ -10,7 +10,7 @@ export class ProductService {
 
   constructor(private http:HttpClient,private session:SessionService) { }
 
-  URL = "http://";
+  URL = "http://localhost:3000/api/";
   productsShoppingCar : any = []; 
 
   data = [
@@ -103,7 +103,6 @@ export class ProductService {
   }
 
   refreshList(){
-  	//return this.http.get(this.URL+'product');
-    return this.data;
+  	return this.http.get(this.URL+'product/list');
   }
 }

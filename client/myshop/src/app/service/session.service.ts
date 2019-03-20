@@ -29,4 +29,8 @@ export class SessionService {
   	localStorage.removeItem("user");
   	localStorage.removeItem("shoppingList");
   }
+
+  isLoggedSession(){
+    return !(this.getSession("user") === null);
+  }
 }

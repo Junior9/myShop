@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {ProductService} from '../../service/product-service.service';
 import {Product} from '../../model/product'
+import {SessionService} from '../../service/session.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-product-table',
@@ -9,7 +11,9 @@ import {Product} from '../../model/product'
 })
 export class ProductTableComponent implements OnInit {
 
-constructor(private productService:ProductService) { }
+constructor(private productService:ProductService,
+              private session:SessionService,
+              private router: Router) { }
 
   @Input()
   isBuy: boolean;
@@ -22,6 +26,14 @@ constructor(private productService:ProductService) { }
   	}else{
   		this.data = this.productService.refreshList();
   	}
+  }
+
+  buy(){
+    if(this.session.isLoggedSession()){
+      this.router.navigate(['/buy/pay'])
+    }else{
+      this.router.navigate(['/login'])
+    }
   }
 
   removeProductShoppingCar(product:Product){

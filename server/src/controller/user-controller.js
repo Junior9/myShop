@@ -39,6 +39,7 @@ controller.login = (req,res)=>{
         {
           "user":
             {
+              "id":user[0].id,
               "name":user[0].name,
               "email":user[0].email,
               "isAdm":user[0].isAdm

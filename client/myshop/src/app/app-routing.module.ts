@@ -21,7 +21,7 @@ const routes: Routes = [
 	{path:'register',component:UserComponent},
 	{path:'buy/validate',component:BuyValidateComponent},
 	{path:'buy/pay',component:BuyPayComponent},
-
+	
 
 	{path:'**',component:PageNotFoundComponent}
 ];

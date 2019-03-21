@@ -18,7 +18,6 @@ export class ProductListComponent implements OnInit {
          res=> this.data = res,
          err=> console.error(err)
        );
-    
   }
 
   addShoppingCar(product:Product){

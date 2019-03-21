@@ -1,10 +1,20 @@
-<div class="card-group">
-  <div class="card">
-    <img src="{{product.img}}" class="card-img-top" alt="..."  height="250" width="90">
-    <div class="card-body">
-      <h5 class="card-title">{{product.name}}</h5>
-      <p class="card-text">{{product.description}}</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
+<div class="row">
+	<div class="col-md-2">
+		<app-navegation></app-navegation>
+	</div>
+	<div class="col-md-10 p-2">
+		<div class="card-group">
+		  <div class="card">
+		    <img src="{{product.img}}" class="card-img-top" alt="..."  height="250" width="90">
+		    <div class="card-body">
+		      <h5 class="card-title">{{product.name}}</h5>
+		      <p class="card-text">{{product.price}}</p>
+		      <p class="card-text">{{product.description}}</p>
+		      <button (click)="addShoppingCar(product)" class="btn btn-success btn-block">
+		    	<i class="fas fa-shopping-cart"></i>
+		    </button >
+		    </div>
+		  </div>
+		</div>
+	</div>
 </div>

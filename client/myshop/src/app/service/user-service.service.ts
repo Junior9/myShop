@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {User} from '../model/user';
-import {SessionService} from '../service/session.service';
 import {HttpClient} from '@angular/common/http';
+import {SessionService} from '../service/session.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,8 @@ export class UserServiceService {
 
   URL = "http://localhost:3000/api/user/";
 
-  constructor(private session:SessionService,
-                private http:HttpClient) { }
+  constructor(private http:HttpClient,
+                private session:SessionService) { }
   
   user: User = {
   id : '1',

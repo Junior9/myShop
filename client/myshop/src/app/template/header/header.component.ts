@@ -10,18 +10,23 @@ import {Router} from "@angular/router";
 export class HeaderComponent implements OnInit {
 
   constructor(private session:SessionService,private router: Router) { }
-
-  isLogged = true;
+  user = {
+    name:''
+  }
+  isLogged = false;
 
   ngOnInit() {
   	if(this.session.getSession("user") === null){
-  		this.isLogged = false;
-  	}
+      this.isLogged = false;
+  	}else{
+      var user = this.session.getSession("user");
+      this.user["name"] = user["name"];
+      this.isLogged = true;
+    }
   }
   
   logoff(){
   	this.session.cleanSession();
   	this.router.navigate(['/home'])
   }
-
 }

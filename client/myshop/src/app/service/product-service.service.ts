@@ -2,28 +2,19 @@ import { Injectable } from '@angular/core';
 import {Product} from '../model/product';
 import {HttpClient} from '@angular/common/http';
 import {SessionService} from  '../service/session.service';
-
 import { HttpHeaders } from '@angular/common/http';
-
 
 @Injectable({
   providedIn: 'root'
 })
 
-
-
-
 export class ProductService {
 
-
-
-  constructor(private http:HttpClient,private session:SessionService) { }
+  constructor(private http:HttpClient,
+                private session:SessionService) { }
 
   URL = "http://localhost:3000/api/product/";
   productsShoppingCar : any = []; 
-
-
-
 
   create(product:Product){
     const httpOptions = {
@@ -31,14 +22,13 @@ export class ProductService {
         'Content-Type':  'application/json'  
       })
     };
-    //const result = this.http.post(this.URL+'create',product,httpOptions);
     return this.http.post<Product>(this.URL+'create', product,httpOptions);
   }
 
   delete(id){}
   update(product:Product){}
   get(id){
-    return null;
+    return this.http.get(this.URL+id);
   }
 
 

@@ -29,8 +29,15 @@ export class UserComponent implements OnInit {
   register(userForm:NgForm){
     console.log(userForm.value);
 
-  	this.service.create(userForm.value);
+  	this.service.create(userForm.value).subscribe(
+      (response)=>{
+        console.log(response)
+      },
+      (err)=>{
+        console.log(err)
+      });
 
+    
   	//if(user === null){	
   		//this.router.navigate(['/register'])		
   	//}else{

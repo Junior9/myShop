@@ -24,7 +24,10 @@ constructor(private productService:ProductService,
   	if(this.isBuy){
   		this.data = this.productService.shoppingCarList();
   	}else{
-  		this.data = this.productService.refreshList();
+  		this.productService.refreshList().subscribe(
+         res=> this.data = res,
+         err=> console.error(err)
+       );;
   	}
   }
 

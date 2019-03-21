@@ -8,7 +8,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class UserServiceService {
 
-  URL = "http://localhost:3000/api/";
+  URL = "http://localhost:3000/api/user/";
 
   constructor(private session:SessionService,
                 private http:HttpClient) { }
@@ -22,16 +22,12 @@ export class UserServiceService {
   };
   
   login(user:User){
-  	user = this.get(user);
-  	if(user.id != ''){
-  		this.session.startSession(user);
-  	}
-  	return user;
+  	return this.http.post(this.URL+'login',user);
   }
 
   create(user:User){
-  	this.session.startSession(user);
-    this.http.post(this.URL+'user/create',user);
+  	//this.session.startSession(user);
+    return this.http.post(this.URL+'create',user);
   }
 
   logoff(){

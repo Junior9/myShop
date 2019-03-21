@@ -14,10 +14,6 @@ export class ProductListComponent implements OnInit {
    data: any = [];
 
   ngOnInit() {
-
-
-    //this.data = this.productService.refreshList();
-    
   	this.productService.refreshList().subscribe(
          res=> this.data = res,
          err=> console.error(err)

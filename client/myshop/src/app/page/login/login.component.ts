@@ -31,7 +31,27 @@ export class LoginComponent implements OnInit {
   }
 
   login(userForm:NgForm){
-  	var user = this.service.login(userForm.value);
+
+  	this.service.login(userForm.value).subscribe(
+      (response)=>{
+         if(response["status"]){
+           var user = response["user"];
+           console.log(user["isAdm"])
+           if(user["isAdm"]){
+             this.router.navigate(['/home/adm'])
+           }else{
+             this.router.navigate(['/home'])
+           }
+
+         }
+      },
+      (err)=>{
+        console.log(err)
+      }
+
+    );
+
+    /*
   	if(user.id != ''){	
   		if(user.isAdm){
   			this.router.navigate(['/home/adm'])
@@ -39,6 +59,8 @@ export class LoginComponent implements OnInit {
   			this.router.navigate(['/home'])
   		}
   	}
+
+    */
   }
 
 }

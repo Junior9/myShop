@@ -3,65 +3,42 @@ import {Product} from '../model/product';
 import {HttpClient} from '@angular/common/http';
 import {SessionService} from  '../service/session.service';
 
+import { HttpHeaders } from '@angular/common/http';
+
+
 @Injectable({
   providedIn: 'root'
 })
+
+
+
+
 export class ProductService {
+
+
 
   constructor(private http:HttpClient,private session:SessionService) { }
 
-  URL = "http://localhost:3000/api/";
+  URL = "http://localhost:3000/api/product/";
   productsShoppingCar : any = []; 
 
-  data = [
-    {
-      id:'1',
-      name:"MotoG7",
-      img:"https://http2.mlstatic.com/moto-g7-plus-D_NQ_NP_929867-MLM29559103847_032019-O.webp",
-      description:"El mejor celular del Motorola"
-    },
-    {
-      id:'2',
-      name:"MotoG7",
-      img:"https://http2.mlstatic.com/moto-g7-plus-D_NQ_NP_929867-MLM29559103847_032019-O.webp",
-      description:"El mejor celular del Motorola"
-    },
-    {
-      id:'3',
-      name:"MotoG7",
-      img:"https://http2.mlstatic.com/moto-g7-plus-D_NQ_NP_929867-MLM29559103847_032019-O.webp",
-      description:"El mejor celular del Motorola"
-    },
-    {
-      id:'4',
-      name:"MotoG7",
-      img:"https://http2.mlstatic.com/moto-g7-plus-D_NQ_NP_929867-MLM29559103847_032019-O.webp",
-      description:"El mejor celular del Motorola"
-    },
-    {
-      id:'5',
-      name:"MotoG7",
-      img:"https://http2.mlstatic.com/moto-g7-plus-D_NQ_NP_929867-MLM29559103847_032019-O.webp",
-      description:"El mejor celular del Motorola"
-    }
 
-  ];
+
 
   create(product:Product){
-    //const result = this.http.post(this.URL+'create',product);
-    //console.log(result);
-    //return result;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'  
+      })
+    };
+    //const result = this.http.post(this.URL+'create',product,httpOptions);
+    return this.http.post<Product>(this.URL+'create', product,httpOptions);
   }
 
   delete(id){}
   update(product:Product){}
   get(id){
-    return {
-      id:'1',
-      name:"MotoG7",
-      img:"https://http2.mlstatic.com/moto-g7-plus-D_NQ_NP_929867-MLM29559103847_032019-O.webp",
-      description:"El mejor celular del Motorola"
-    };
+    return null;
   }
 
 
@@ -103,6 +80,6 @@ export class ProductService {
   }
 
   refreshList(){
-  	return this.http.get(this.URL+'product/list');
+  	return this.http.get(this.URL+'list');
   }
 }

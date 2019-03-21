@@ -5,29 +5,25 @@ controller.get=(req,res)=>{
   req.getConnection((err,connection) => {
     connection.query('SELECT * FROM product WHERE id = ?',[id],(err,product) =>{
       if(err){
-        res.json(err);
+        res.json({"mensage":err,"status":false});
       }
-      console.log(product);
       res.json(product);
     })
   });
 }
 
 controller.create = (req, res) => {
+console.log(req.body);
 
   const data = req.body;
-  console.log("Data",data)
-  console.log("Req",req.body )
-  
   req.getConnection((err, connection) => {
     const query = connection.query('INSERT INTO product set ?', data, (err, product) => {
     if(err){
-      res.json({"mensage":err});
+      res.json({"mensage":err,"status":false});
     } 
-    console.log(product)
+    res.json({"mensage":"Ok","status":true});
     })
   })
-  
 }
 
 controller.update = (req, res) => {
@@ -59,10 +55,11 @@ controller.delete = (req,res) =>{
 };
 
 controller.list = (req,res) =>{
+  console.log("dalsjkdjsdhjsf");
 	req.getConnection((err,connection) => {
 		connection.query('SELECT * FROM product',(err,prducts) =>{
 			if(err){
-				res.json({"mensage":err});
+				res.json({"mensage":err,"status":false});
 			}
 			console.log(prducts);
 			res.json(prducts);

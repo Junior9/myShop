@@ -20,10 +20,26 @@ app.use(morgan('dev'));
 app.use(myConnection(mysql,{
 	host:'localhost',
 	user:'root',
-	password:'root',
+	password:'root',	
 	port:3306,
 	database: 'node-loja'
 },'single'));
+
+var doesNotModifyBody = function(request, response, next) {
+  request.params = {
+    a: "b"
+  };
+  // calls next because it hasn't modified the header
+  next();
+};
+
+// middleware that modify the response body
+var doesModifyBody = function(request, response, next) {
+  response.setHeader("Content-Type", "application/json");
+  response.end();
+  // doesn't call next()
+};
+
 
 app.use(express.urlencoded({extended:false}));
 
@@ -31,6 +47,10 @@ app.use(express.urlencoded({extended:false}));
 app.use('/api/user',userRoute);
 app.use('/api/product',productRoute);
 app.use('/api/buy',buyRoute);
+
+
+app.use(doesNotModifyBody);
+app.use(doesModifyBody);
 
 //static files (img,javascript,css ,...)
 app.set(express.static(path.join(__dirname,'public')));

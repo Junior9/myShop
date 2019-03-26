@@ -27,6 +27,6 @@ export class HeaderComponent implements OnInit {
   
   logoff(){
   	this.session.cleanSession();
-  	this.router.navigate(['/home'])
+  	window.location.reload();
   }
 }

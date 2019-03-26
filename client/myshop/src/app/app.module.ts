@@ -22,6 +22,7 @@ import { BuyValidateComponent } from './page/buy-validate/buy-validate.component
 import { BuyPayComponent } from './page/buy-pay/buy-pay.component';
 import { OrderModule } from 'ngx-order-pipe';
 import { FilterPipeModule } from 'ngx-filter-pipe';
+import { TablaProductAdmComponent } from './component/adm/tabla-product-adm/tabla-product-adm.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     BannerComponent,
     ProductTableComponent,
     BuyValidateComponent,
-    BuyPayComponent
+    BuyPayComponent,
+    TablaProductAdmComponent
   ],
   imports: [
     BrowserModule,

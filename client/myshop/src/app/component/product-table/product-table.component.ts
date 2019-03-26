@@ -1,8 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {ProductService} from '../../service/product-service.service';
+import {ShoppingCarService} from '../../service/shopping-car.service';
 import {Product} from '../../model/product'
 import {SessionService} from '../../service/session.service';
 import {Router} from "@angular/router";
+import {NavegationComponent} from '../../component/navegation/navegation.component';
+
 
 @Component({
   selector: 'app-product-table',
@@ -13,23 +16,18 @@ export class ProductTableComponent implements OnInit {
 
 constructor(private productService:ProductService,
               private session:SessionService,
-              private router: Router) { }
+              private router: Router,
+              private shppingCarService:ShoppingCarService) { }
+    
 
-  @Input()
-  isBuy: boolean;
+ @Input() navegation: NavegationComponent;
+
   total=0.0;
   data: any = [];
 
   ngOnInit() {
-  	if(this.isBuy){
-  		this.data = this.productService.shoppingCarList();
-      this.sumTotal();
-  	}else{
-  		this.productService.refreshList().subscribe(
-         res=> this.data = res,
-         err=> console.error(err)
-       );
-  	}
+  	this.data = this.shppingCarService.shoppingCarList();
+    this.sumTotal();
   }
 
   buy(){
@@ -41,13 +39,9 @@ constructor(private productService:ProductService,
   }
 
   removeProductShoppingCar(product:Product){
-    this.data = this.productService.shoppingCarRemove(product);
+    this.data = this.shppingCarService.shoppingCarRemove(product);
     this.removeList(product.id);
-  }
-
-  delete(id){
-    this.productService.delete(id);
-    this.removeList(id);
+    window.location.reload();
   }
 
   removeList(id){
@@ -61,9 +55,12 @@ constructor(private productService:ProductService,
 
   sumTotal(){
     var i=0;
-    for(i=0; i < this.data.length; i++){
+    if(this.data != null){
+      for(i=0; i < this.data.length; i++){
        this.total += parseInt( this.data[i].price);
+      }
     }
+    
   }
 
 }

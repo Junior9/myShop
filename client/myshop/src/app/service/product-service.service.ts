@@ -3,6 +3,7 @@ import {Product} from '../model/product';
 import {HttpClient} from '@angular/common/http';
 import {SessionService} from  '../service/session.service';
 import { HttpHeaders } from '@angular/common/http';
+import {ShoppingCarService} from '../service/shopping-car.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,11 @@ import { HttpHeaders } from '@angular/common/http';
 export class ProductService {
 
   constructor(private http:HttpClient,
-                private session:SessionService) { }
+                private session:SessionService,
+                private shoppingCarService:ShoppingCarService) { }
 
   URL = "http://localhost:3000/api/product/";
-  productsShoppingCar : any = []; 
+  products : any = []; 
 
   create(product:Product){
     const httpOptions = {
@@ -22,6 +24,7 @@ export class ProductService {
         'Content-Type':  'application/json'  
       })
     };
+    console.log(product);
     return this.http.post<Product>(this.URL+'create', product,httpOptions);
   }
 
@@ -48,48 +51,6 @@ export class ProductService {
 
   get(id){
     return this.http.get(this.URL+id);
-  }
-
-  shoppingCarAdd(product:Product){
-    var addProduct = true;
-
-    if(this.productsShoppingCar === null){
-      this.productsShoppingCar=[];
-      this.productsShoppingCar.push(product);
-    }else{
-
-      this.productsShoppingCar.forEach(p => {
-        if(p.id == product.id){
-          addProduct = false;
-        }
-      })
-
-      if(addProduct){
-        console.log(product);
-        this.productsShoppingCar.push(product);
-      } 
-    }
-    this.session.addSession("shoppingList",this.productsShoppingCar);
-  }
-
-  shoppingCarRemove(product:Product){  
-    this.productsShoppingCar;
-    var index;
-
-    for(index=0;index<this.productsShoppingCar.length;index++){
-      if(product.id === this.productsShoppingCar[index].id){
-        this.productsShoppingCar.splice(index,1);
-        console.log(this.productsShoppingCar);
-        //this.session.addSession("shoppingList",this.productsShoppingCar  );
-        break;
-      }
-    }
-
-  }
-
-  shoppingCarList(){
-    this.productsShoppingCar = this.session.getSession("shoppingList");
-    return this.productsShoppingCar;
   }
 
   refreshList(){

@@ -39,12 +39,14 @@ export class ProductAdmComponent implements OnInit {
          }
        );
     }else{
+
       this.action = "Add";
     }
   }
 
   onSubmit(register:NgForm){
       if(register.value.id == "" || register.value.id == null){
+        delete register.value.id;
         this.productService.create(register.value).subscribe((response)=>{
           this.router.navigate(['/home/adm'])
         },(error)=>{

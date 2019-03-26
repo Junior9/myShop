@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductService} from '../../service/product-service.service';
+import {ShoppingCarService} from '../../service/shopping-car.service';
 import {Product} from '../../model/product';
 
 @Component({
@@ -9,15 +9,18 @@ import {Product} from '../../model/product';
 })
 export class NavegationComponent implements OnInit {
 
-  constructor(private productService:ProductService) { }
+  constructor(private service:ShoppingCarService) { }
 
   data: any = [];
   ngOnInit() {
-  	 this.data = this.productService.shoppingCarList();
+  	 this.refleshShoppingCar();
   }
 
   removeProductShoppingCar(product:Product){
-  	this.data = this.productService.shoppingCarRemove(product);
+  	this.data = this.service.shoppingCarRemove(product);
   }
 
+  refleshShoppingCar(){
+    this.data = this.service.shoppingCarList();
+  }
 }

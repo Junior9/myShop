@@ -10,25 +10,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of data">
-        <td scope="col">
+      <tr *ngFor="let product of products">      
+        <a href="product/edit/{{product.id}}">
           <img src="{{product.img}}"  height="42" width="42">
-        </td>
-
+        </a>  
         <td>{{product.name}}</td>
         <td>{{product.price | currency}}</td>
         <td class="no-mobile">{{product.description}}</td>
-        <a (click)="removeProductShoppingCar(product)" class="btn btn-danger">X</a>
+        <a (click)="delete(product.id)" class="btn btn-danger">X</a>
       </tr>
     </tbody>  
   </table>
-  
-  <div class="row">
-    <div class="col">
-      <a (click)="buy()" class="btn btn-success m-3">Buy</a>
-    </div>
-    <div class="col">
-      Total:{{total | currency}}
-    </div>
-  </div>
+  <a href="product/create" class="btn btn-success m-3">Add Product</a>
 </div>

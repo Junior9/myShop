@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductService} from '../../service/product-service.service';
+import {ShoppingCarService} from '../../service/shopping-car.service';
 import {Product} from '../../model/product';
 
 @Component({
@@ -9,7 +10,8 @@ import {Product} from '../../model/product';
 })
 export class ProductListComponent implements OnInit {
 
-  constructor(private productService:ProductService) { }
+  constructor(private productService:ProductService,
+                private shoppingCarService:ShoppingCarService) { }
 
    data: any = [];
 
@@ -21,7 +23,7 @@ export class ProductListComponent implements OnInit {
   }
 
   addShoppingCar(product:Product){
-    this.productService.shoppingCarAdd(product);
+    this.shoppingCarService.shoppingCarAdd(product);
   }
 
   delete(id:string){

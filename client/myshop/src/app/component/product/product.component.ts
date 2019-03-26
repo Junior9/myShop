@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductService} from '../../service/product-service.service';
+import {ShoppingCarService} from '../../service/shopping-car.service';
 import {Product} from '../../model/product';
 import { ActivatedRoute } from "@angular/router";
 
@@ -11,7 +12,8 @@ import { ActivatedRoute } from "@angular/router";
 export class ProductComponent implements OnInit {
 
   constructor(private productService:ProductService,
-  				private route: ActivatedRoute) { }
+  				private route: ActivatedRoute,
+          private shoppingCarService:ShoppingCarService) { }
 
   product:Product;
 
@@ -28,6 +30,6 @@ export class ProductComponent implements OnInit {
   }
 
   addShoppingCar(product:Product){
-    this.productService.shoppingCarAdd(product);
+    this.shoppingCarService.shoppingCarAdd(product);
   }
 }

@@ -17,12 +17,12 @@ const routes: Routes = [
 	{path:'home/adm',component:HomeAdmComponent},
 	{path:'login',component:LoginComponent},
 	{path:'product/create',component:ProductAdmComponent},
+	{path:'product/edit/:id',component:ProductAdmComponent},
 	{path:'product/:id',component:ProductComponent},
 	{path:'register',component:UserComponent},
 	{path:'buy/validate',component:BuyValidateComponent},
 	{path:'buy/pay',component:BuyPayComponent},
 	
-
 	{path:'**',component:PageNotFoundComponent}
 ];
 

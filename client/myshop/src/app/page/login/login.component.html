@@ -1,8 +1,6 @@
-<div class="row">
-	<div class="col"></div>
-	<div class="col">
-		<form #form="ngForm" (submit)="login(form)" autocomplete="off">
 
+
+<form #form="ngForm" (submit)="login(form)" autocomplete="off">
 		  <div class="form-group">
 		    <label for="email">Email address</label>
 		    <input #email="ngModel" [(ngModel)]="service.user.email" type="email" class="form-control" placeholder="Enter email" id="email" name="email">
@@ -15,6 +13,3 @@
 		  <button type="submit" class="btn btn-primary">Login</button>
 		</form>
 		<a href="/register">Create account</a>
-	</div>
-	<div class="col"></div>
-</div>		

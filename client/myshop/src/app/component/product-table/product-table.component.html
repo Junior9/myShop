@@ -1,37 +1,54 @@
-<table class="table table-striped">
-	<thead>
+<div class="table-responsive p-3">
+  <table class="table table-striped">
+    <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">Name</th>
+          <th scope="col">Price</th>
           <th scope="col">Description</th>
-
-          <th *ngIf="isBuy" scope="col">Delete </th>
-
+          <th scope="col">Delete </th>
         </tr>
-      </thead>
+    </thead>
       <tbody>
         <tr *ngFor="let product of data">
-          <td>
-            <a href="">
+        
+          <td *ngIf="!isBuy" scope="col">
+            <a href="product/edit/{{product.id}}">
               <img src="{{product.img}}"  height="42" width="42">
-            </a>
+            </a>  
           </td>
+
+          <td *ngIf="isBuy" scope="col">
+              <img src="{{product.img}}"  height="42" width="42">
+          </td>
+
           <td>{{product.name}}</td>
-          <td>@{{product.description}}</td>
+          <td>{{product.price | currency}}</td>
+          <td>{{product.description}}</td>
 
-          <th *ngIf="isBuy" scope="col">
-
-            <a (click)="removeProductShoppingCar(product)" class="btn btn-danger">X</a>
+          <th *ngIf="!isBuy" scope="col">
+            <a (click)="delete(product.id)" class="btn btn-danger">X</a>
           </th>
 
+          <th *ngIf="isBuy" scope="col">
+            <a (click)="removeProductShoppingCar(product)" class="btn btn-danger">X</a>
+          </th>
         </tr>
       </tbody>  
-</table>
+  </table>
 
-<div *ngIf="isBuy; else elseBlock">
-  <a (click)="buy()" class="btn btn-success m-3">Buy</a>
+  <div *ngIf="isBuy; else elseBlock">
+    <div class="row">
+      <div class="col">
+        <a (click)="buy()" class="btn btn-success m-3">Buy</a>
+      </div>
+      <div class="col">
+        Total:{{total | currency}}
+      </div>
+    </div>
+  </div>
+
+  <ng-template #elseBlock>
+    <a href="product/create" class="btn btn-success m-3">Add Product</a>
+  </ng-template>  
 </div>
-<ng-template #elseBlock>
-  <a href="product/create" class="btn btn-success m-3">Add Product</a>
-</ng-template>
-

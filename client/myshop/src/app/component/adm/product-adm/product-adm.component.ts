@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Product} from '../../../model/product';
 import {NgForm} from '@angular/forms';
 import {ProductService} from '../../../service/product-service.service';
-
+import { ActivatedRoute } from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-product-adm',
@@ -19,36 +20,57 @@ export class ProductAdmComponent implements OnInit {
 		img:''
 	}
 
-  constructor(private produtoService:ProductService) { }
+  action = "";
+
+  constructor(private productService:ProductService,
+                private route: ActivatedRoute,
+                private router: Router) { }
 
   ngOnInit() {
-
-
+    if(this.route.snapshot.paramMap.get("id")){
+      var id = this.route.snapshot.paramMap.get("id");
+      this.productService.get(id).subscribe(
+         (response)=>{
+           this.product = response[0];
+           this.action = "Edit";
+         },
+         (err)=>{
+           console.log(err)
+         }
+       );
+    }else{
+      this.action = "Add";
+    }
   }
 
-  resetForm(form?:NgForm){
-  	if(form != null){
+  onSubmit(register:NgForm){
+      if(register.value.id == "" || register.value.id == null){
+        this.productService.create(register.value).subscribe((response)=>{
+          this.router.navigate(['/home/adm'])
+        },(error)=>{
+          console.log('error during post is ', error)
+        });
+        this.resetForm(null);
+      }else{
+        this.productService.update(register.value).subscribe((response)=>{
+          this.router.navigate(['/home/adm'])
+        },(error)=>{
+          console.log('error during post is ', error)
+        });
+      }
+   }
 
-  	}else{
-  		this.product = {
-  		id:'',
-		name:'',
-		description:'',
-		price:0,
-		img:''
-		}	
-  	}
-  }
+   resetForm(form?:NgForm){
+    if(form != null){
 
-onSubmit(register:NgForm){
-    if(register.value.id == "" || register.value.id == null){
-      var result = this.produtoService.create(register.value).subscribe((response)=>{
-        console.log('response from post data is ', response);
-      },(error)=>{
-        console.log('error during post is ', error)
-      });
-      console.log(result);
-      this.resetForm(null);
+    }else{
+      this.product = {
+        id:'',
+        name:'',
+        description:'',
+        price:0,
+        img:''
+      }  
     }
   }
 

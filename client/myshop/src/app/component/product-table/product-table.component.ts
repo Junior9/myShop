@@ -17,17 +17,18 @@ constructor(private productService:ProductService,
 
   @Input()
   isBuy: boolean;
-
+  total=0.0;
   data: any = [];
 
   ngOnInit() {
   	if(this.isBuy){
   		this.data = this.productService.shoppingCarList();
+      this.sumTotal();
   	}else{
   		this.productService.refreshList().subscribe(
          res=> this.data = res,
          err=> console.error(err)
-       );;
+       );
   	}
   }
 
@@ -41,5 +42,28 @@ constructor(private productService:ProductService,
 
   removeProductShoppingCar(product:Product){
     this.data = this.productService.shoppingCarRemove(product);
+    this.removeList(product.id);
   }
+
+  delete(id){
+    this.productService.delete(id);
+    this.removeList(id);
+  }
+
+  removeList(id){
+    var i=0;
+    for(i=0; i < this.data.length; i++){
+      if(this.data[i].id == id){
+        this.data.splice(i,1);
+      }
+    }
+  }
+
+  sumTotal(){
+    var i=0;
+    for(i=0; i < this.data.length; i++){
+       this.total += parseInt( this.data[i].price);
+    }
+  }
+
 }

@@ -25,12 +25,30 @@ export class ProductService {
     return this.http.post<Product>(this.URL+'create', product,httpOptions);
   }
 
-  delete(id){}
-  update(product:Product){}
+  delete(id){
+    console.log(id);
+    this.http.delete<Product>(this.URL+'delete/'+id).subscribe(
+      (response)=>{
+        console.log(response)
+      },
+      (err)=>{
+        console.log(err)
+      }
+    );
+  }
+
+  update(product:Product){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'  
+      })
+    };
+    return this.http.put<Product>(this.URL+'update/'+product.id, product,httpOptions);
+  }
+
   get(id){
     return this.http.get(this.URL+id);
   }
-
 
   shoppingCarAdd(product:Product){
     var addProduct = true;
@@ -39,29 +57,34 @@ export class ProductService {
       this.productsShoppingCar=[];
       this.productsShoppingCar.push(product);
     }else{
+
       this.productsShoppingCar.forEach(p => {
         if(p.id == product.id){
           addProduct = false;
         }
       })
+
       if(addProduct){
+        console.log(product);
         this.productsShoppingCar.push(product);
       } 
     }
     this.session.addSession("shoppingList",this.productsShoppingCar);
   }
 
-  shoppingCarRemove(product:Product){
-    var index = -1;
-    var newList: any =[];
-    this.productsShoppingCar.forEach((p,index) => {
-      if(p.id != product.id){
-        newList.push(product);
+  shoppingCarRemove(product:Product){  
+    this.productsShoppingCar;
+    var index;
+
+    for(index=0;index<this.productsShoppingCar.length;index++){
+      if(product.id === this.productsShoppingCar[index].id){
+        this.productsShoppingCar.splice(index,1);
+        console.log(this.productsShoppingCar);
+        //this.session.addSession("shoppingList",this.productsShoppingCar  );
+        break;
       }
-    })
-    this.productsShoppingCar = newList;
-    this.session.addSession("shoppingList",this.productsShoppingCar);
-    return this.productsShoppingCar;
+    }
+
   }
 
   shoppingCarList(){

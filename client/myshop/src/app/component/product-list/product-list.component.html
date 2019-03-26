@@ -2,11 +2,12 @@
 	<div *ngFor="let product of data" class="col p-3">
 		<div  class="card" style="width: 13rem;">
 		  <a href="product/{{product.id}}">
-		  	<img src="{{product.img}}" class="card-img-top img-fluid " >
+		  	<img src="{{product.img}}" class="card-img-top" height="150" width="100" >
 		  </a>
 		  <div class="card-body">
 		    <h5 class="card-title">{{product.name}}</h5>
 		    <p class="card-text" maxlength="10">{{ product.description}}</p>
+		    <p class="card-text" maxlength="10">{{ product.price| currency}}</p>
 		    <button (click)="addShoppingCar(product)" class="btn btn-success btn-block">
 		    	<i class="fas fa-shopping-cart"></i>
 		    </button >

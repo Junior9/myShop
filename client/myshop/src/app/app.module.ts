@@ -20,7 +20,8 @@ import { HttpClientModule} from '@angular/common/http';
 import { ProductTableComponent } from './component/product-table/product-table.component';
 import { BuyValidateComponent } from './page/buy-validate/buy-validate.component';
 import { BuyPayComponent } from './page/buy-pay/buy-pay.component';
-
+import { OrderModule } from 'ngx-order-pipe';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,8 @@ import { BuyPayComponent } from './page/buy-pay/buy-pay.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    OrderModule,
+    FilterPipeModule,
     HttpClientModule     
   ],
   providers: [],

@@ -1,0 +1,13 @@
+$mobile: 425px;
+
+@mixin mobile{
+	@media(max-width: #{$mobile}){
+		@content;
+	}
+}
+
+.no-mobile{
+	@include mobile{
+		display: none;
+	}
+}

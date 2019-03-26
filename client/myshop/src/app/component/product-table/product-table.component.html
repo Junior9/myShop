@@ -1,40 +1,40 @@
 <div class="table-responsive p-3">
   <table class="table table-striped">
     <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Price</th>
-          <th scope="col">Description</th>
-          <th scope="col">Delete </th>
-        </tr>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col" class="no-mobile">Description</th>
+        <th scope="col">Delete </th>
+      </tr>
     </thead>
-      <tbody>
-        <tr *ngFor="let product of data">
-        
-          <td *ngIf="!isBuy" scope="col">
-            <a href="product/edit/{{product.id}}">
-              <img src="{{product.img}}"  height="42" width="42">
-            </a>  
-          </td>
+    <tbody>
+      <tr *ngFor="let product of data">
 
-          <td *ngIf="isBuy" scope="col">
-              <img src="{{product.img}}"  height="42" width="42">
-          </td>
+        <td *ngIf="!isBuy" scope="col">
+          <a href="product/edit/{{product.id}}">
+            <img src="{{product.img}}"  height="42" width="42">
+          </a>  
+        </td>
 
-          <td>{{product.name}}</td>
-          <td>{{product.price | currency}}</td>
-          <td>{{product.description}}</td>
+        <td *ngIf="isBuy" scope="col">
+          <img src="{{product.img}}"  height="42" width="42">
+        </td>
 
-          <th *ngIf="!isBuy" scope="col">
-            <a (click)="delete(product.id)" class="btn btn-danger">X</a>
-          </th>
+        <td>{{product.name}}</td>
+        <td>{{product.price | currency}}</td>
+        <td class="no-mobile">{{product.description}}</td>
 
-          <th *ngIf="isBuy" scope="col">
-            <a (click)="removeProductShoppingCar(product)" class="btn btn-danger">X</a>
-          </th>
-        </tr>
-      </tbody>  
+        <th *ngIf="!isBuy" scope="col">
+          <a (click)="delete(product.id)" class="btn btn-danger">X</a>
+        </th>
+
+        <th *ngIf="isBuy" scope="col">
+          <a (click)="removeProductShoppingCar(product)" class="btn btn-danger">X</a>
+        </th>
+      </tr>
+    </tbody>  
   </table>
 
   <div *ngIf="isBuy; else elseBlock">

@@ -1,7 +1,13 @@
-$mobile: 320px;
+$mobile: 425px;
 
 @mixin mobile{
-	@media(min-width: #{$desktop}){
+	@media(max-width: #{$mobile}){
 		@content;
+	}
+}
+
+.grid-login{
+	@include mobile{
+		display: none;
 	}
 }
